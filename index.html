@@ -163,8 +163,8 @@ body::before {
 }
 
 /* On the column: the title at its left edge, the paragraph down its right
-   half, and the Frida link at the foot of the left one, level with the
-   paragraph's last line. On a phone they stack, the link last. */
+   half, and Frida's logo and App Store badge at the foot of the left one,
+   level with the paragraph's foot. On a phone they stack, the badge last. */
 .intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -194,15 +194,30 @@ body::before {
 .intro hgroup { grid-area: title; }
 .intro > p { grid-area: text; }
 
-/* A paragraph of its own rather than the bare link, so its line box is the
-   same as the paragraph's and the two last lines share a baseline. */
+/* Frida's logo and Apple's badge side by side, the same height, their feet
+   level with the foot of the paragraph. The badge is Apple's own artwork,
+   shown at its 40px minimum and left exactly as drawn, with more than the
+   quarter of its height Apple asks for clear around it. */
 .intro .more {
   grid-area: more;
   align-self: end;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Pulled left like the title, so the letters start on the column's edge. */
-.intro .more a { margin-left: -0.2em; }
+.more a {
+  display: block;
+  border-radius: 6px;
+}
+
+.more img {
+  display: block;
+  width: auto;
+  height: 40px;
+}
+
+.more a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 /* Marked as if with a highlighter, the band just wider than the word and
    pulled left so the letters still start on the column's edge. */
@@ -231,7 +246,7 @@ body::before {
 
 /* Marked in the title's grey, with the footer's arrow to say it leaves the
    page; kept on one line so the band never splits. */
-.about a {
+.intro > p a {
   padding: 0.05em 0.2em;
   background: var(--highlight);
   color: inherit;
@@ -239,16 +254,16 @@ body::before {
   white-space: nowrap;
 }
 
-.about a svg {
+.intro > p a svg {
   width: 0.625em;
   height: 0.625em;
   margin-left: 0.15em;
   transition: transform 160ms ease;
 }
 
-.about a:hover svg { transform: translate(1px, -1px); }
+.intro > p a:hover svg { transform: translate(1px, -1px); }
 
-.about a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.intro > p a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 footer {
   padding: clamp(32px, 6vh, 56px) var(--gutter);
@@ -390,7 +405,10 @@ footer {
       <p>Simple on the surface, extraordinary beneath.</p>
     </hgroup>
     <p>At MonyCompany, we envision an agentic experience that feels both radically intuitive and deeply familiar. We believe the future of human–computer interaction lies in minimalism, where complexity recedes and simplicity emerges. Through minimalism and a deliberate sense of taste, we seek to create interfaces, starting with <a href="https://frida.chat/" target="_blank" rel="noopener noreferrer">Frida<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>, that conceal the extraordinary complexity of intelligent systems behind the simplicity of everyday experience.</p>
-    <p class="more"><a href="https://frida.chat/" target="_blank" rel="noopener noreferrer">Learn more about Frida<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <div class="more">
+      <a href="https://frida.chat/" target="_blank" rel="noopener noreferrer"><img src="assets/frida-logo.svg" alt="Frida" width="90" height="40"></a>
+      <a href="https://apps.apple.com/us/app/frida-ai/id6808538428" target="_blank" rel="noopener noreferrer"><img src="assets/app-store-badge.svg" alt="Download Frida on the App Store" width="120" height="40"></a>
+    </div>
   </div>
 </section>
 
